@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Collection Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #4285F4;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 100px;
+        }
+        button {
+            background-color: #4285F4;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #3367D6;
+        }
+        #form-response {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <h1>Contact Information Form</h1>
+    <form id="data-form">
+        <div class="form-group">
+            <label for="name">Full Name*</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email Address*</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone">
+        </div>
+        
+        <div class="form-group">
+            <label for="subject">Subject</label>
+            <select id="subject" name="subject">
+                <option value="">Select a subject</option>
+                <option value="General Inquiry">General Inquiry</option>
+                <option value="Feedback">Feedback</option>
+                <option value="Support">Support</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message"></textarea>
+        </div>
+        
+        <button type="submit">Submit</button>
+    </form>
+    
+    <div id="form-response"></div>
+
+    <script>
+        document.getElementById('data-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const formObject = {};
+            formData.forEach((value, key) => {
+                formObject[key] = value;
+            });
+            
+            // Show loading state
+            const submitButton = this.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+            
+            // Send data to Google Apps Script
+            fetch('https://script.google.com/macros/s/AKfycbwtMnIh6w-Zb4EgKMiEUufoycypDwt4UfOoPe6wvcqUSvOnIxR29IrnSQA3mWk8zrG_3A/exec', {
+                method: 'POST',
+                body: JSON.stringify(formObject),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const responseDiv = document.getElementById('form-response');
+                if (data.result === 'success') {
+                    responseDiv.textContent = 'Thank you! Your form has been submitted successfully.';
+                    responseDiv.className = 'success';
+                    document.getElementById('data-form').reset();
+                } else {
+                    responseDiv.textContent = 'There was an error submitting your form. Please try again.';
+                    responseDiv.className = 'error';
+                }
+                responseDiv.style.display = 'block';
+            })
+            .catch(error => {
+                const responseDiv = document.getElementById('form-response');
+                responseDiv.textContent = 'There was an error submitting your form. Please try again.';
+                responseDiv.className = 'error';
+                responseDiv.style.display = 'block';
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Submit';
+            });
+        });
+    </script>
+</body>
+</html>
