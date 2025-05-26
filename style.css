@@ -38,28 +38,40 @@ body {
     background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background for readability */
     border-radius: 10px;
     box-sizing: border-box; /* Include padding in the element's total width and height */
-    /* Removed flex-shrink: 0 as body is no longer a flex container */
 }
 
-.content h1 {
+/* Style for the logo image */
+.site-logo {
+    display: block; /* Make it a block element to center it with margin */
+    max-width: 100%; /* Ensure the image never exceeds the width of its container (.content) */
+    height: auto; /* Maintain the aspect ratio */
+    margin: 0 auto 10px auto; /* Center horizontally and add bottom margin (similar to old h1) */
+    /* Optional: If the logo has a large transparent area, you might want to add
+       a specific max-width here, e.g., max-width: 500px; */
+}
+
+
+/* Remove old h1 styles */
+/* .content h1 {
     font-size: 3em;
     margin-bottom: 10px;
     color: #00bcd4;
-    word-wrap: break-word; /* Prevent long words from overflowing */
-}
+    word-wrap: break-word;
+} */
+
 
 .content h2 {
     font-size: 1.5em;
     margin-bottom: 20px;
     color: #aaa;
-    word-wrap: break-word; /* Prevent long words from overflowing */
+    word-wrap: break-word;
 }
 
 .content p {
     font-size: 1.1em;
     line-height: 1.6;
     margin-bottom: 15px;
-    word-wrap: break-word; /* Prevent long words from overflowing */
+    word-wrap: break-word;
 }
 
 /* CTA Button styling */
@@ -90,14 +102,21 @@ body {
 /* Responsive adjustments for smaller screens */
 @media (max-width: 600px) {
     .content {
-        padding: 15px; /* Reduce padding on smaller screens */
-        margin: 20px auto; /* Adjust top/bottom margin */
-        width: 95%; /* Ensure it takes up most of the width */
+        padding: 15px;
+        margin: 20px auto;
+        width: 95%;
     }
 
-    .content h1 {
+    /* Remove the h1 style from the media query as it's no longer used */
+    /* .content h1 {
         font-size: 2em;
-    }
+    } */
+
+    /* Adjust logo margin on smaller screens if needed */
+     .site-logo {
+         margin-bottom: 10px; /* Or a slightly smaller value if preferred */
+     }
+
 
     .content h2 {
         font-size: 1.2em;
@@ -108,7 +127,7 @@ body {
     }
 
     .cta-button {
-        padding: 10px 20px; /* Reduce button padding */
-        font-size: 1em; /* Reduce button font size */
+        padding: 10px 20px;
+        font-size: 1em;
     }
 }
