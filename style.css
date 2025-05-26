@@ -3,12 +3,15 @@ body {
     padding: 0;
     font-family: 'Arial', sans-serif;
     color: #fff; /* Text color for content */
-    overflow: hidden; /* Prevent scrollbars from particles */
+    /* REMOVE: overflow: hidden; */ /* This prevents scrolling */
+    overflow-y: auto; /* Allow vertical scrolling if content overflows */
     display: flex; /* Use flexbox to center content */
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Align items to the start, allowing content to push down */
     min-height: 100vh; /* Full viewport height */
     background-color: #222; /* Fallback background */
+    position: relative; /* Needed for z-index context */
+    z-index: 0; /* Base z-index for body */
 }
 
 /* particles.js container */
@@ -29,13 +32,15 @@ body {
 /* Content container */
 .content {
     position: relative; /* Position above particles */
-    z-index: 1;
+    z-index: 10; /* Make sure this is clearly higher than the particles z-index */
     text-align: center;
     padding: 20px;
     max-width: 800px; /* Limit content width */
-    margin: 0 auto; /* Center content block */
+    margin: 50px auto; /* Add some top/bottom margin and center the block */
     background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background for readability */
     border-radius: 10px;
+    box-sizing: border-box; /* Include padding in width calculation */
+    flex-shrink: 0; /* Prevent content from shrinking in flex container */
 }
 
 .content h1 {
@@ -69,8 +74,36 @@ body {
     transition: background-color 0.3s ease;
     border: none;
     cursor: pointer;
+    /* Ensure button is above background */
+    position: relative;
+    z-index: 1;
 }
 
 .cta-button:hover {
     background-color: #0097a7; /* Slightly darker shade on hover */
+}
+
+/* Optional: Add some responsiveness for smaller screens */
+@media (max-width: 600px) {
+    .content {
+        padding: 15px;
+        margin: 20px auto;
+    }
+
+    .content h1 {
+        font-size: 2em;
+    }
+
+    .content h2 {
+        font-size: 1.2em;
+    }
+
+    .content p {
+        font-size: 1em;
+    }
+
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
 }

@@ -1,0 +1,76 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    color: #fff; /* Text color for content */
+    overflow: hidden; /* Prevent scrollbars from particles */
+    display: flex; /* Use flexbox to center content */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full viewport height */
+    background-color: #222; /* Fallback background */
+}
+
+/* particles.js container */
+#particles-js {
+    position: fixed; /* Cover the whole screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #222; /* Background color for particles area */
+    background-image: url(''); /* Optional background image */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    z-index: -1; /* Place behind content */
+}
+
+/* Content container */
+.content {
+    position: relative; /* Position above particles */
+    z-index: 1;
+    text-align: center;
+    padding: 20px;
+    max-width: 800px; /* Limit content width */
+    margin: 0 auto; /* Center content block */
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background for readability */
+    border-radius: 10px;
+}
+
+.content h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    color: #00bcd4; /* Cyan-like color often associated with tech/AI */
+}
+
+.content h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #aaa;
+}
+
+.content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* CTA Button styling */
+.cta-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    color: #fff;
+    background-color: #00bcd4; /* Same as H1 color for emphasis */
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    background-color: #0097a7; /* Slightly darker shade on hover */
+}
