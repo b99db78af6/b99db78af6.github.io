@@ -30,7 +30,8 @@ body {
 .content {
     position: relative; /* Position above particles */
     z-index: 10; /* Make sure this is clearly higher than the particles z-index */
-    text-align: center;
+    /* text-align: center; */
+    text-align: justify;
     padding: 20px; /* Add padding inside the content box */
     max-width: 800px; /* Limit content width */
     width: 95%; /* Use a percentage width for responsiveness */
@@ -127,6 +128,7 @@ body {
 
     .content p {
         font-size: 1em;
+        text-align: justify; /* <-- ENSURE THIS IS ALSO IN THE MEDIA QUERY IF YOU WANT IT ON SMALL SCREENS */
     }
 
     .cta-button {
