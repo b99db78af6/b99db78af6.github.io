@@ -48,6 +48,9 @@ body {
     margin: 0 auto 10px auto; /* Center horizontally and add bottom margin (similar to old h1) */
     /* Optional: If the logo has a large transparent area, you might want to add
        a specific max-width here, e.g., max-width: 500px; */
+    /* Add the invert filter */
+    filter: invert(1); /* 1 or 100% means fully inverted */
+}
 }
 
 
